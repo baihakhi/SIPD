@@ -54,7 +54,8 @@ if(isset($_POST['tambah'])){
         }
       }
   //kamus dosen
-  $TTL    = readInput($_POST['KL']).",".readInput($_POST['TL']);
+//  $TL     = $_POST['TL'] ;
+  $TTL    = readInput($_POST['KL']).",".$_POST['TL'];
   $nip    = readInput($_POST['NIP']);
   $psw    = md5($nip);
 
@@ -68,19 +69,23 @@ if(isset($_POST['tambah'])){
   array_push($array,!empty($_POST['lab']) ? readInput($_POST['lab']) : '');
 
   if (in_array('',$array)) {
+    print_r($array);
     $notif = 3;
   }
   else {
     if (!checkDosenExist($_POST['NIP'])) {
       if (tambahDosen($array)) {
         $notif = 1;
-        header('Location: info_dosen.php?q='$nip)
+        print_r($array);
+        header('Location: info_dosen.php?q=$nip');
       }
       else {
+        print_r($array);
         $notif = 2;
       }
     }
     else {
+      print_r($array);
       $notif = 4;
     }
   }

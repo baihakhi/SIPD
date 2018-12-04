@@ -10,7 +10,7 @@
 	$cek = login('admin','Admin','admin1234');
 	if ($cek == true){
 //		getAdmin('Admin');
-		$query = $db->query("SELECT * FROM admin WHERE username = 'Admin'");
+		$query = $db->query("SELECT * FROM admin WHERE username = 'Sunu'");
 		$aktor = $query->fetch_object();
 //		echo "benar";
 	}
@@ -69,10 +69,10 @@
 				<?php
 				if($status=="admin"){
 					echo '<li>
-						<a href="#"><i class="fa fa-edit fa-2x"></i>Kelola Dosen<span class="fa arrow"></span></a>
+						<a href="#"><i class="fa fa-edit fa-2x"></i>Pengaturan Dosen<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="../admin/tambah_dosen.php">Input Dosen</a></li>
-							<li><a href="../admin/input_jadwal_dosen.php">Daftar Dosen</a></li>
+							<li><a href="../admin/tambah_mapel.php">Input Dosen</a></li>
+							<li><a href="../admin/edit_mapel.php">Daftar Dosen</a></li>
 						</ul>
 					</li>';
 				}elseif ($status=="anggota") {
@@ -129,7 +129,7 @@
 				?>
 				<li>
 						<?php
-							echo '<a href="#"><i class="fa fa-book fa-2x"></i> Kelola TR1';
+							echo '<a href="#"><i class="fa fa-book fa-2x"></i> Pengaturan Mata Kuliah';
 						?>
 					<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
@@ -138,11 +138,8 @@
 								echo '<li><a href="pendaftaran_tr1.php">Pendaftaran TR1</a></li>';
 							}
 						?>
-						<li><a href="daftar_tr1.php">Daftar Mahasiswa TR1</a></li>
-						<li><a href="daftar_penempatan_tr1.php">Daftar penempatan mahasiswa</a></li>
-						<li><a href="daftar_nilai_tr1_real.php">Daftar Nilai TR1</a></li>
-						<li><a href="daftar_nilai_progress.php">Daftar Nilai Progress</a></li>
-						<li><a href="daftar_nilai_outline.php">Daftar Nilai Outline</a></li>
+						<li><a href="tambah_mapel.php">Tambah Mata Kuliah</a></li>
+						<li><a href="daftar_penempatan_tr1.php">Atur Mata Kuliah</a></li>
 
 				<?php
 					if($status=='dosen'){

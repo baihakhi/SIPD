@@ -45,6 +45,8 @@ function checkDosenExist ($arr){
   $email = $arr[3];
   $alamat = $arr[4];
   $foto = $arr[5];
+  $password = $arr[6];
+  $laboratorium = $arr[7];
 
   $query = $db->query("SELECT * FROM dosen WHERE NIP='$NIP' ");
   return checkQueryExist($query);
@@ -82,7 +84,7 @@ function getLabDosen($id){
 
   $query = $db->query("SELECT * FROM laboratorium JOIN dosen
                         ON laboratorium.id_lab=dosen.laboratorium
-                        WHERE dosen.laboratorium=".$id);
+                        WHERE dosen.laboratorium='$id'");
 
   return isset($query) ? runQuery($query) : false;
 }

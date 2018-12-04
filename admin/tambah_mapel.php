@@ -10,9 +10,7 @@ if(isset($_POST['tambah'])){
 
   array_push($array,!empty($_POST['id_mapel']) ? readInput($_POST['id_mapel']) : '');
   array_push($array,!empty($_POST['nama_mapel']) ? readInput($_POST['nama_mapel']) : '');
-//  array_push($array,!empty($_POST['KL']) && !empty($_POST['TL']) ? $TTL : '');
-array_push($array,!empty($_POST['jurusan']) ? readInput($_POST['jurusan']) : '');
-array_push($array,!empty($_POST['semester']) ? readInput($_POST['semester']) : '');
+  array_push($array,!empty($_POST['jurusan']) ? readInput($_POST['jurusan']) : '');
   array_push($array,!empty($_POST['tempat']) ? readInput($_POST['tempat']) : '');
   array_push($array,!empty($_POST['hari']) ? readInput($_POST['hari']) : '');
   array_push($array,!empty($_POST['waktu']) ? readInput($_POST['waktu']) : '');
@@ -76,18 +74,19 @@ array_push($array,!empty($_POST['semester']) ? readInput($_POST['semester']) : '
                     <td class="colon">:</td>
                     <td ><input type="text" name="tempat"></td>
                     <td >
-                      <label for="jam" style="margin:0 30px 0 20px">Hari</label>
+                      <label for="hari" style="margin:0 30px 0 20px">Hari</label>
                       <select name="hari">
-                        <option value="senin">Senin</option>
-                        <option value="selasa">Selasa</option>
-                        <option value="Rabu">Rabu</option>
-                        <option value="Kamis">Kamis</option>
-                        <option value="Jumat">Jumat</option>
+                        <option value="monday">Senin</option>
+                        <option value="tuesday">Selasa</option>
+                        <option value="wednesday">Rabu</option>
+                        <option value="thrusday">Kamis</option>
+                        <option value="friday">Jumat</option>
                       </select>
                     </td>
                     <td >
-                      <label for="jam" style="margin:0 30px 0 20px">Waktu</label>
-                      <input type="time" autocomplete="on" name="waktu" id="jam" style="max-width:30%">
+                      <label for="jam" style="margin:0 30px 0 0">Waktu</label>
+                      <input type="time" autocomplete="on" name="waktu" id="jam1" min="06:00" onkeyup="addDuration()" onclick="addDuration()" style="max-width:30%">-
+                      <input type="time" autocomplete="on" name="waktu" id="jam2" style="max-width:30%">
                     </td>
                   </tr>
                 </table>
@@ -114,6 +113,42 @@ array_push($array,!empty($_POST['semester']) ? readInput($_POST['semester']) : '
       $("select[required]").css({display: "inline", height: 0, padding: 0, width: 0});
       $(".caret").css("height", "50px");
     });
+
+    var getDuration;
+    function durasi() {
+        var timeStartValue = document.getElementById('jam1').value;
+        var timeEndValue = document.getElementById('jam2').value;
+
+        var result = fromTime(timeEndValue) + fromTime(timeStartValue);
+
+        if (!isNaN(result)) {
+            var duration = toTime(result);
+        }
+    }
+
+    addDuration() {
+      var timeStartValue = document.getElementById('jam1').value;
+
+      var timeEndValue = fromTime(timeStartValue) + 60;
+
+      if (!isNaN(timeEndValue)) {
+          document.getElementById('jam1').value = toTime(timeEndValue);
+    }
+
+    function fromTime(time) {
+        var timeArray = time.split('.');
+        var hours = parseInt(timeArray[0]);
+        var minutes = parseInt(timeArray[1]);
+
+        return (hours * 60) + minutes;
+    }
+
+    function toTime(number) {
+        var hours = Math.floor(number / 60);
+        var minutes = number % 60;
+
+        return hours + "." + (minutes <= 9 ? "0" : "") + minutes;
+    }
     </script>
 
     <?php

@@ -15,8 +15,8 @@ if (isset($_GET['q'])) {
   if (checkQueryExist($row)) {
     while ($dosen = $row->fetch_object()) {
       $nama = $dosen->nama;
-      $nip = $dosen->NIP;
-      $ttl = $dosen->TTL;
+      $nip = $dosen->nip;
+      $ttl = $dosen->ttl;
       $alamat = $dosen->alamat;
       $email = $dosen->email;
       $selectedLab = $dosen->laboratorium;
@@ -36,8 +36,6 @@ else {
 }
 
 
-$profilPict = $target_dir . $gambar;
-
 //-------------parsing TTL
   $TTL = explode(",",$ttl);
   $date = $TTL[1];
@@ -48,11 +46,23 @@ $profilPict = $target_dir . $gambar;
 //------------tombol SUBMIT
 if(isset($_POST['ubah'])){
 
+  if ($_FILES['userfile']['error'] > 0)
+  {
+    switch ($_FILES['userfile']['error'])
+    {
+      case 1:  $errPict='File exceeded upload_max_filesize';
+      case 2:  $errPict='File exceeded max_file_size';
+      case 3:  $errPict='File only partially uploaded';
+      case 4:  $errPict='No file uploaded';
+      case 6:  $errPict='Cannot upload file: No temp directory specified';
+      case 7:  $errPict='Upload failed: Cannot write to disk';
+    }
+  }
   $array = array();
 
 //------------photo calling
   $allowed_type = array("jpg", "png", "jpeg");
-//  $target_dir = "assets/image/";
+  $target_dir = "../assets/image/";
   $target_file = $target_dir . basename($_FILES['userfile']['name']);
   $file_type = pathinfo($target_file,PATHINFO_EXTENSION);
   $nama_file = $_POST['NIP'] .'.'. $file_type;
@@ -123,6 +133,8 @@ if(isset($_POST['ubah'])){
       }
     }
 }
+
+$profilPict = $target_dir . $gambar;
 
 
 ?>

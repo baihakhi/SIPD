@@ -4,7 +4,7 @@ define ("HOST","localhost");
 define ("USER","root");
 define ("PASS","");
 define ("DATABASE","sipd");
-define ("BASE","/PKL");
+define ("BASE","/SIPD");
 
 $db = new mysqli(HOST,USER,PASS,DATABASE);
 

@@ -2,10 +2,11 @@
 include_once('koneksi.php');
 
 function readInput($input){
+  global $db;
   $input = trim($input);
   $input = stripcslashes($input);
   $input = htmlspecialchars($input);
-  $input = mysql_real_escape_string($input);
+  $input = mysqli_real_escape_string($db,$input);
   return $input;
 }
 

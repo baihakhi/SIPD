@@ -18,7 +18,7 @@ $arrDosen = getAllRow('dosen');
           <table class="responsive-table">
             <?php
             while ($dosen = $arrDosen->fetch_object()) {
-              $nip = $dosen->NIP;
+              $nip = $dosen->nip;
               $nama = $dosen->nama;
               ?>
               <tbody>
